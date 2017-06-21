@@ -44,8 +44,7 @@ public class MyArrayList<T> implements List<T> {
      * @return - новый массив.
      */
     private Object[] makeResize(int resize) {
-        int fullSize = this.elements.length + resize;
-        Object[] tmpArray = new Object[fullSize];
+        Object[] tmpArray = new Object[this.elements.length + resize];
         System.arraycopy(this.elements, 0, tmpArray, 0, this.elements.length);
         return tmpArray;
     }
