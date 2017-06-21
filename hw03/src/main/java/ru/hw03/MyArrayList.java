@@ -12,13 +12,9 @@ public class MyArrayList<T> implements List<T> {
      */
     private Object[] elements;
     /**
-     * Полный размер массива.
-     */
-    private int fullSize;
-    /**
      * Размер массива по умолчанию, при создании и расширении.
      */
-    private final int DefaultFullSize = 10;
+    private final static int DefaultFullSize = 10;
     /**
      * Позиция ячейки, следующей за последним элементом в массиве.
      */
@@ -29,8 +25,7 @@ public class MyArrayList<T> implements List<T> {
      */
     public MyArrayList(final int size) {
         if (size > 0) {
-            this.fullSize = size;
-            this.elements = new Object[fullSize];
+            this.elements = new Object[size];
             this.position = 0;
         } else {
             throw new IllegalArgumentException("Argument must be greater than 0");
@@ -40,8 +35,7 @@ public class MyArrayList<T> implements List<T> {
      * Конструктор без параметров, использующий значение по умолчанию для размера.
      */
     public MyArrayList() {
-        this.fullSize = this.DefaultFullSize;
-        this.elements = new Object[fullSize];
+        this.elements = new Object[this.DefaultFullSize];
         this.position = 0;
     }
     /**
@@ -50,15 +44,15 @@ public class MyArrayList<T> implements List<T> {
      * @return - новый массив.
      */
     private Object[] makeResize(int resize) {
-        this.fullSize += resize;
-        Object[] tmpArray = new Object[this.fullSize];
+        int fullSize = this.elements.length + resize;
+        Object[] tmpArray = new Object[fullSize];
         System.arraycopy(this.elements, 0, tmpArray, 0, this.elements.length);
         return tmpArray;
     }
 
     @Override
     public boolean add(T t) {
-        if (this.position < this.fullSize) {
+        if (this.position < this.elements.length) {
             this.elements[this.position] = t;
             this.position++;
         } else {
@@ -171,7 +165,7 @@ public class MyArrayList<T> implements List<T> {
     public boolean addAll(Collection<? extends T> c) {
         Object[] obj = c.toArray();
         int lenght = obj.length;
-        this.elements = makeResize(this.fullSize + lenght);
+        this.elements = makeResize(this.elements.length + lenght);
         System.arraycopy(obj, 0, this.elements, this.position, lenght);
         this.position += lenght;
         return true;
