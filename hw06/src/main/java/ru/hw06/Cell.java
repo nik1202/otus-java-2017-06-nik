@@ -3,16 +3,41 @@ package ru.hw06;
 import java.util.Iterator;
 
 public class Cell implements Comparable<Cell>, Iterable<Cell> {
+    /**
+     * Номинал.
+     */
     private final int nominal;
+    /**
+     * Кол-во банкнот.
+     */
     private int count;
-
+    /**
+     * Ссылка не следующую ячейку.
+     */
     private Cell next;
-
+    /**
+     * Конструктор.
+     * @param nominal - номинал.
+     * @param count - кол-во.
+     */
     public Cell(int nominal, int count) {
         this.nominal = nominal;
         this.count = count;
     }
-
+    /**
+     * Конструктор копирования.
+     * @param cell - ячейка для копирования.
+     */
+    public Cell(Cell cell) {
+        this.nominal = cell.nominal;
+        this.count = cell.count;
+        this.next = cell.next;
+    }
+    /**
+     * Снятие суммы.
+     * @param requested - запрашиваемая сумма.
+     * @return - результат.
+     */
     public boolean withdraw(int requested) {
         int expectedCount = Math.min(requested / nominal, count);
         int expectedCash = expectedCount * nominal;
@@ -26,21 +51,40 @@ public class Cell implements Comparable<Cell>, Iterable<Cell> {
         }
         return false;
     }
-
+    /**
+     * Геттер для номинала.
+     * @return - номинал.
+     */
     public int getNominal() {
         return nominal;
     }
-
+    /**
+     * Геттер для кол-ва.
+     * @return - кол-во.
+     */
     public int getCount() {
         return count;
     }
-
+    /**
+     * Сеттер для следующей ячейки.
+     * @param next - следующая ячейка.
+     */
     public void setNext(Cell next) {
         this.next = next;
     }
-
+    /**
+     * Получить баланс.
+     * @return - баланс.
+     */
     public int getBalance() {
         return count * nominal;
+    }
+    /**
+     * Копировать ячейку.
+     * @return - копия ячейки.
+     */
+    public Cell copy() {
+        return new Cell(this);
     }
 
     @Override
