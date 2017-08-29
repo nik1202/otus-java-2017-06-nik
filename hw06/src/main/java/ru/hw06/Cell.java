@@ -31,7 +31,11 @@ public class Cell implements Comparable<Cell>, Iterable<Cell> {
     public Cell(Cell cell) {
         this.nominal = cell.nominal;
         this.count = cell.count;
-        this.next = cell.next;
+        if(cell.next != null) {
+            this.next = new Cell(cell.next);
+        } else {
+            this.next = null;
+        }
     }
     /**
      * Снятие суммы.
