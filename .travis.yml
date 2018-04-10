@@ -6,6 +6,5 @@ script:  cd  ./hw01 && mvn clean install
       && cd ../hw04 && mvn clean install
       && cd ../hw05 && mvn clean install
       && cd ../hw06 && mvn clean install
-      && cd ../hw07 && mvn clean install
       && cd ../hw08 && mvn clean install
       && cd ../hw09 && mvn clean install
