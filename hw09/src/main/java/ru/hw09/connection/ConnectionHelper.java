@@ -7,6 +7,7 @@ import java.sql.SQLException;
 /**
  * Create db connection.
  */
+
 public class ConnectionHelper {
     public static Connection getConnection() {
         try {
