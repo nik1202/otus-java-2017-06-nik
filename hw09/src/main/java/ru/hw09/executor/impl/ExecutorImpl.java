@@ -30,12 +30,14 @@ public class ExecutorImpl implements Executor {
 
     @Override
     public <T extends DataSet> T load(long id, Class<T> clazz) throws SQLException {
-        try(Statement stmt = connection.createStatement()) {
-            stmt.execute("select * from UserDataSet where id='" + id + "';");
-            ResultSet result = stmt.getResultSet();
-            T user = getObjectFromResult(result, clazz);
-            result.close();
-            return user;
+        try(PreparedStatement stmt = connection.prepareStatement(
+                "select * from UserDataSet where id = ?;"
+        )) {
+            stmt.setLong(1, id);
+            stmt.execute();
+            try (ResultSet result = stmt.getResultSet()) {
+                return getObjectFromResult(result, clazz);
+            }
         }
     }
 
@@ -43,13 +45,13 @@ public class ExecutorImpl implements Executor {
     public <T extends DataSet> List<T> loadAll(Class<T> clazz) throws SQLException {
         try(Statement stmt = connection.createStatement()) {
             stmt.execute("select * from UserDataSet;");
-            ResultSet result = stmt.getResultSet();
-            List<T> users = new ArrayList<>();
-            while (!result.isLast()) {
-                users.add(getObjectFromResult(result, clazz));
+            try (ResultSet result = stmt.getResultSet()) {
+                List<T> users = new ArrayList<>();
+                while (!result.isLast()) {
+                    users.add(getObjectFromResult(result, clazz));
+                }
+                return users;
             }
-            result.close();
-            return users;
         }
     }
 
