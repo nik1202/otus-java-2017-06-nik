@@ -1,3 +1,3 @@
 language: java
 sudo: false
-script: mvn clean install
+script:  cd ./hw09 && mvn clean install && cd ../hw08 && mvn clean install && cd ../
