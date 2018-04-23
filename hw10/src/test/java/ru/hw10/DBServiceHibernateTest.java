@@ -31,7 +31,7 @@ public class DBServiceHibernateTest {
     }
 
     @Test
-    public void addAndGetOne() throws Exception {
+    public void addAndGetOne() {
         try(DBServiceHibernateImpl service = new DBServiceHibernateImpl()) {
             UserDataSet user1 = makeUserInstance("Vasya", 25, "Lenina", "111111", "2222222");
             UserDataSet user2 = makeUserInstance("Petya", 35, "Kolkhoznaya", "333333", "444444");
@@ -48,7 +48,7 @@ public class DBServiceHibernateTest {
     }
 
     @Test
-    public void addAndGetAll() throws Exception {
+    public void addAndGetAll() {
         try(DBServiceHibernateImpl service = new DBServiceHibernateImpl()) {
             UserDataSet user1 = makeUserInstance("Vasya", 25, "Lenina", "111111", "2222222");
             UserDataSet user2 = makeUserInstance("Petya", 35, "Kolkhoznaya", "333333", "444444");
