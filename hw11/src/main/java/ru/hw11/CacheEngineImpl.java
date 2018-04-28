@@ -1,5 +1,7 @@
 package ru.hw11;
 
+import ru.hw11.web.MyServer;
+
 import java.lang.ref.SoftReference;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -17,6 +19,7 @@ public class CacheEngineImpl<K, V> implements CacheEngine<K, V> {
     private final long lifeTimeMs;
     private final long idleTimeMs;
     private final boolean isEternal;
+    private MyServer server;
 
     private final Map<K, SoftReference<MyElement<K, V>>> elements = new LinkedHashMap<>();
     private final Timer timer = new Timer();
@@ -29,6 +32,9 @@ public class CacheEngineImpl<K, V> implements CacheEngine<K, V> {
         this.lifeTimeMs = lifeTimeMs > 0 ? lifeTimeMs : 0;
         this.idleTimeMs = idleTimeMs > 0 ? idleTimeMs : 0;
         this.isEternal = lifeTimeMs == 0 && idleTimeMs == 0 || isEternal;
+
+        server = new MyServer(this);
+        server.start();
     }
 
     public void put(MyElement<K, V> element) {
@@ -89,8 +95,23 @@ public class CacheEngineImpl<K, V> implements CacheEngine<K, V> {
         };
     }
 
-
     private boolean isT1BeforeT2(long t1, long t2) {
         return t1 < t2 + TIME_THRESHOLD_MS;
+    }
+
+    public int getMaxElements() {
+        return maxElements;
+    }
+
+    public long getLifeTimeMs() {
+        return lifeTimeMs;
+    }
+
+    public long getIdleTimeMs() {
+        return idleTimeMs;
+    }
+
+    public boolean isEternal() {
+        return isEternal;
     }
 }
