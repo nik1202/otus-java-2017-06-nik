@@ -9,4 +9,5 @@ script:  cd  ./hw01 && mvn clean install
       && cd ../hw08 && mvn clean install
       && cd ../hw09 && mvn clean install
       && cd ../hw11 && mvn clean install
+      && cd ../hw12 && mvn clean install
       && cd ../hw10 && mvn clean install

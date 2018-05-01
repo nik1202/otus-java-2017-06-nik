@@ -1,4 +1,4 @@
-package ru.hw11.web;
+package ru.hw12;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -32,6 +32,7 @@ public class MyServer {
     public void start() {
         try {
             server.start();
+//            server.join();
         }catch (Exception e) {
             e.printStackTrace();
         }

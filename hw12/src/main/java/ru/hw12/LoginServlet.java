@@ -1,5 +1,6 @@
-package ru.hw11.web;
+package ru.hw12;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,12 +14,12 @@ public class LoginServlet extends HttpServlet {
     private static final String PASSWORD = "admin";
 
     public void doGet(HttpServletRequest request,
-                      HttpServletResponse response) throws IOException {
+                      HttpServletResponse response) throws IOException, ServletException {
         doPost(request, response);
     }
 
     public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) throws IOException {
+                       HttpServletResponse response) throws IOException, ServletException {
         String requestLogin = request.getParameter(LOGIN_PARAMETER_NAME);
         String requestPass = request.getParameter(PASS_PARAMETER_NAME);
 

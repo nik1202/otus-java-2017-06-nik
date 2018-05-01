@@ -1,4 +1,4 @@
-package ru.hw11.web;
+package ru.hw12;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,7 +21,8 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (request.getRequestURI().contains("login")) {
+
+        if (request.getRequestURI().contains("login") || request.getRemoteAddr().equals("127.0.0.1")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             HttpSession session = request.getSession();

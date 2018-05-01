@@ -1,4 +1,4 @@
-package ru.hw11.web;
+package ru.hw12;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
